@@ -1,0 +1,24 @@
+package ArrayLeetcode;
+
+public class searchA2Dmatrix2 {
+    public boolean search(int[][] matrix, int target){
+        int row = matrix.length;
+        int col = matrix[0].length;
+
+        int rowIndex = 0;
+        int colIndex = col - 1;
+
+        while (rowIndex < rowIndex && colIndex >= 0){
+            int element = matrix[rowIndex][colIndex];
+
+            if (element == target){
+                return true;
+            }else if (element > target){
+                colIndex--;
+            }else {
+                rowIndex++;
+            }
+        }
+        return false;
+    }
+}

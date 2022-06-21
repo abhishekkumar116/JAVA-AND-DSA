@@ -1,0 +1,50 @@
+package hashmapLevel2;
+
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class checkIfArrayCanBeDividedIntoPairs {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0; i < arr.length; i++){
+            arr[i] = sc.nextInt();
+        }
+        int k = sc.nextInt();
+        solution(arr, k);
+    }
+    public static void solution(int[] arr, int k){
+        HashMap<Integer, Integer> rfmap = new HashMap<>();
+
+        for (int val : arr){
+            int rem = val % k;
+            int of =rfmap.getOrDefault(rem, 0);
+            rfmap.put(rem, of + 1);
+        }
+        for (int val : arr){
+            int rem = val % k;
+            if(rem == 0){
+                int fq = rfmap.get(rem);
+                if (fq %2 == 1){
+                    System.out.println(false);
+                    return;
+                }
+            }else if (2 * rem == k){
+                int fq = rfmap.get(rem);
+                if (fq % 2 == 1){
+                    System.out.println(false);
+                    return;
+                }
+            }else {
+                int fq = rfmap.get(rem);
+                int ofq = rfmap.getOrDefault(k - rem, 0);
+                if (fq != ofq){
+                    System.out.println(false);
+                    return;
+                }
+            }
+        }
+        System.out.println(true);
+    }
+}
